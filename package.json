@@ -2,9 +2,11 @@
   "name": "remote-executor-backend",
   "version": "1.0.0",
   "description": "Backend to handle remote execution of tasks on different servers.",
-  "main": "app.js",
+  "main": "src/app.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tests/",
+    "start": "node src/app.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +19,12 @@
   },
   "homepage": "https://github.com/Nathan-Duckett/Remote-Executor-Backend#readme",
   "dependencies": {
+    "chai": "^4.2.0",
     "express": "^4.17.1",
+    "mocha": "^7.1.1",
     "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "request": "^2.88.2"
   }
 }
