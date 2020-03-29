@@ -1,10 +1,15 @@
 import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import helmet from 'helmet';
+import morgan from 'morgan';
 
 let PORT = 4000;
 
 async function startServer() {
   const app = express();
 
+  setupMiddleware(app);
 
   app.get('/status', (req, res) => {
     res.status(200).end();
@@ -49,6 +54,16 @@ async function startServer() {
     console.log("Server started on port " + PORT);
   });
 
+}
+
+function setupMiddleware(app) {
+  app.use(helmet());
+
+  app.use(bodyParser.json());
+
+  app.use(cors());
+
+  app.use(morgan('combined'));
 }
 
 startServer();
