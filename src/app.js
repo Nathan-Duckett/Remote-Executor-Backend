@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import RunCommand from './services/runCommand.js';
 
 let PORT = 4000;
 
@@ -18,9 +19,18 @@ async function startServer() {
     res.status(200).end();
   });
 
+  app.get('/run', (req, res) => {
+    let ssh = new RunCommand('localhost', 'nathan', '/home/nathan/.ssh/id_rsa');
+    ssh.run("echo Hello World").then(result => {
+      console.log(result);
+      res.send(result).end();
+    });
+
+  });
+
   app.get('/', (req, res) => {
     res.send("Hello World!");
-  })
+  });
 
   /// error handlers
   app.use((err, req, res, next) => {
