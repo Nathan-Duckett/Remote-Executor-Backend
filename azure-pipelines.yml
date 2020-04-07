@@ -12,5 +12,7 @@ steps:
 
 - script: |
     npm install
+    # Ensure server is started first for tests to run
+    npm run start &
     npm run test
   displayName: 'npm install and test'
